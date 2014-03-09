@@ -24,6 +24,22 @@ namespace  convstr{
         return new Segment(maxDistPoints[0], maxDistPoints[1]);
     }
 
+    vector<Point> maxIterDist(vector<Point>::iterator stp, vector<Point>::iterator endp){
+        double maxDist = 0;
+        vector<Point> maxDistPoints();
+        for(vector<Point>::iterator i = stp; i!= endp; i++)
+        {
+            for(vector<Point>::iterator j = stp; j!= endp; j++)
+            {
+                if (i->dist(*j) > maxDist){
+                    maxDist = i->dist(*j);
+                    maxDistPoints[0] = *i;
+                    maxDistPoints[1] = *j;
+                }
+            }
+        }
+        return maxDistPoints;
+    }
 
 }
 
@@ -34,11 +50,14 @@ int main()
    Point* point1  = new Point(1.0, 1.0, 1.0);
    Point* point2  = new Point(2.0, 2.0, 2.0);
    Point* point3  = new Point(1.0, 2.0, 3.0);
+
    points.push_back(*point1);
    points.push_back(*point2);
    points.push_back(*point3);
-   Segment* maxSegments = maxDist(points);
-   cout<< maxSegments->length() << endl;
-   //cout<<"sdsdsd"<< endl;
+
+   vector<Point> maxp = maxIterDist(points.begin(), points.end());
+   //Segment* maxSegments = maxDist(points);
+   cout<< maxp[0].dist(maxp[1]) << endl;
+
 }
 
