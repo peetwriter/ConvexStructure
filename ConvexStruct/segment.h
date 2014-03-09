@@ -15,8 +15,6 @@ public:
     double length(){
         return p1.dist(p2);
     }
-
-private:
     Point p1;
     Point p2;
 };

@@ -1,11 +1,11 @@
 #include <iostream>
 #include <vector>
-#include <point.hh>
+#include <segment.h>
 
 using namespace std;
 
 namespace  convstr{
-    vector<Point> maxDist(vector<Point> inPoints )
+    Segment* maxDist(vector<Point> inPoints )
     {
         double maxDist = 0;
         vector<Point> maxDistPoints(2);
@@ -16,13 +16,12 @@ namespace  convstr{
                 if (inPoints[i].dist(inPoints[j]) > maxDist)
                 {
                     maxDist = inPoints[i].dist(inPoints[j]);
-                    cout<< maxDist << endl;
                     maxDistPoints[0] = inPoints[i];
                     maxDistPoints[1] = inPoints[j];
                 }
             }
         }
-        return maxDistPoints;
+        return new Segment(maxDistPoints[0], maxDistPoints[1]);
     }
 
 
@@ -38,7 +37,8 @@ int main()
    points.push_back(*point1);
    points.push_back(*point2);
    points.push_back(*point3);
-   vector<Point> maxPoints = maxDist(points);
-   cout<< maxPoints[1].x()<< " "<< maxPoints[1].y()<< endl;
+   Segment* maxSegments = maxDist(points);
+   cout<< maxSegments->length() << endl;
+   //cout<<"sdsdsd"<< endl;
 }
 
