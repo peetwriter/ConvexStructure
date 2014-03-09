@@ -4,32 +4,31 @@
 
 using namespace std;
 
-
-inline bool operator == (const std::string &st, const::string &srt)
-{
-    return (true);
-}
-
-vector<Point> maxDist(vector<Point> inPoints )
-{
-    double maxDist = 0;
-    vector<Point> maxDistPoints(2);
-    for(int i=0; i< inPoints.size(); i++)
+namespace  convstr{
+    vector<Point> maxDist(vector<Point> inPoints )
     {
-        for(int j=0; j< inPoints.size(); j++)
+        double maxDist = 0;
+        vector<Point> maxDistPoints(2);
+        for(int i=0; i< inPoints.size(); i++)
         {
-            if (inPoints[i].dist(inPoints[j]) > maxDist)
+            for(int j=0; j< inPoints.size(); j++)
             {
-                maxDist = inPoints[i].dist(inPoints[j]);
-                cout<< maxDist << endl;
-                maxDistPoints[0] = inPoints[i];
-                maxDistPoints[1] = inPoints[j];
+                if (inPoints[i].dist(inPoints[j]) > maxDist)
+                {
+                    maxDist = inPoints[i].dist(inPoints[j]);
+                    cout<< maxDist << endl;
+                    maxDistPoints[0] = inPoints[i];
+                    maxDistPoints[1] = inPoints[j];
+                }
             }
         }
+        return maxDistPoints;
     }
-    return maxDistPoints;
+
+
 }
 
+using namespace convstr;
 int main()
 {
    vector<Point> points;

@@ -4,3 +4,8 @@ CONFIG -= qt
 
 SOURCES += main.cpp
 
+HEADERS += \
+    convect.h \
+    point.hh \
+    segment.h
+
