@@ -1,3 +1,6 @@
+#ifndef POINT_H
+#define POINT_H
+
 #include <iostream>
 #include <math.h>
 #include <vector>
@@ -48,3 +51,5 @@ public:
                 strm << "(" << xval << "," << yval << zval <<")";
         }
 };
+#endif
+

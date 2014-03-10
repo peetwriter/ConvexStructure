@@ -5,11 +5,11 @@
 class conVect
 {
 public:
-  conVect() : x(0),y(0),z(0) {}
-  conVect(float x,float y, float z) : x_(x), y_(y), z_(z) {}
-  float x() { return x_; }
-  float y() { return y_; }
-  float z() { return z_; }
+  conVect() : x_(0),y_(0),z_(0) {}
+  conVect(double x,double y, double z) : x_(x), y_(y), z_(z) {}
+  double x() { return x_; }
+  double y() { return y_; }
+  double z() { return z_; }
   conVect& operator +=(const conVect& rhs)
   {
     x_ += rhs.x_;
@@ -32,9 +32,14 @@ public:
     y_ *+ scalar;
     z_ *+ scalar;
     return *this;
+  }  
+  conVect& crossPr(conVect* vec1, conVect* vec2){
+      x_ = vec1->y_*vec2->z_ - vec1->z_*vec2->y_;
+      y_ = vec1->z_*vec2->x_ - vec1->x_*vec2->z_;
+      z_ = vec1->x_*vec2->y_ - vec1->y_*vec2->x_;
+      return *this;
   }
-private:
- float x_, y_, z_;
+ double x_, y_, z_;
 };
 
 #endif // CONVECT_H

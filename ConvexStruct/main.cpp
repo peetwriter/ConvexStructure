@@ -1,11 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <segment.h>
+#include <convect.h>
 
 using namespace std;
 
 namespace  convstr{
-    Segment* maxDist(vector<Point> inPoints )
+   Segment* maxDist(vector<Point> inPoints )
     {
         double maxDist = 0;
         vector<Point> maxDistPoints(2);
@@ -26,7 +27,7 @@ namespace  convstr{
 
     vector<Point> maxIterDist(vector<Point>::iterator stp, vector<Point>::iterator endp){
         double maxDist = 0;
-        vector<Point> maxDistPoints();
+        vector<Point> maxDistPoints(2);
         for(vector<Point>::iterator i = stp; i!= endp; i++)
         {
             for(vector<Point>::iterator j = stp; j!= endp; j++)
@@ -41,6 +42,28 @@ namespace  convstr{
         return maxDistPoints;
     }
 
+    bool checkPoints(vector<Point> points){
+        //check if points is on one line:
+       double result = 0;
+       conVect* vect1 = new conVect();
+       conVect* vect2 = new conVect();
+       conVect* vect3 = new conVect();
+       vector<Point> maxDist = maxIterDist(points.begin(), points.end());
+       for (vector<Point>::iterator i = points.begin(); i != points.end(); i++ ){
+           vect1->x_ = maxDist[0].x() - i->x();
+           vect1->z_ = maxDist[0].z() - i->z();
+           vect1->y_ = maxDist[0].y() - i->y();
+
+           vect2->x_ = maxDist[1].x() - i->x();
+           vect2->z_ = maxDist[1].z() - i->z();
+           vect2->y_ = maxDist[1].y() - i->y();
+           vect3->crossPr(vect1, vect2);
+           result = vect3->x()*vect3->x() + vect3->y()*vect3->y() + vect3->z()*vect3->z();
+       }
+       if(result = 0){
+           cout<<"all points is on one line"<<endl;
+           return false;
+    }
 }
 
 using namespace convstr;
@@ -48,16 +71,18 @@ int main()
 {
    vector<Point> points;
    Point* point1  = new Point(1.0, 1.0, 1.0);
-   Point* point2  = new Point(2.0, 2.0, 2.0);
-   Point* point3  = new Point(1.0, 2.0, 3.0);
+   Point* point2  = new Point(2.0, 2.0, 1.0);
+   Point* point3  = new Point(3.0, 3.0, 1.0);
 
    points.push_back(*point1);
-   points.push_back(*point2);
+   points.push_back(    *point2);
    points.push_back(*point3);
 
    vector<Point> maxp = maxIterDist(points.begin(), points.end());
+   bool res  = checkPoints(points);
    //Segment* maxSegments = maxDist(points);
    cout<< maxp[0].dist(maxp[1]) << endl;
+
 
 }
 
