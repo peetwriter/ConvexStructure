@@ -25,6 +25,31 @@ public:
       z_ -= rhs.z_;
       return *this;
   }
+
+  conVect& operator -(conVect& rhs)
+  {
+      x_ -= rhs.x_;
+      y_ -= rhs.y_;
+      z_ -= rhs.z_;
+      return *this;
+  }
+
+  conVect& operator -=(Point& rhs)
+  {
+      x_ -= rhs.x();
+      y_ -= rhs.y();
+      z_ -= rhs.z();
+      return *this;
+  }
+
+  conVect& operator -(Point& rhs)
+  {
+      x_ -= rhs.x();
+      y_ -= rhs.y();
+      z_ -= rhs.z();
+      return *this;
+  }
+
   template <typename Scalar>
   conVect& operator *=(const Scalar& scalar)
   {
@@ -39,6 +64,10 @@ public:
       z_ = vec1->x_*vec2->y_ - vec1->y_*vec2->x_;
       return *this;
   }
+  double vecLength(){
+      return sqrt(x_*x_+ y_*y_+ z_*z_);
+  }
+
  double x_, y_, z_;
 };
 
